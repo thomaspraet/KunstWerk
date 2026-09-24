@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="KunstWerk.Business/KunstWerk.Business.csproj" />
+  <Project Path="KunstWerk.DataAccess/KunstWerk.DataAccess.csproj" />
+  <Project Path="KunstWerk.Models/KunstWerk.Models.csproj" />
+  <Project Path="KunstWerk.Utility/KunstWerk.Utility.csproj" />
+  <Project Path="KunstWerk.Web/KunstWerk.Web.csproj" />
+</Solution>
