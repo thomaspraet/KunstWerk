@@ -1,0 +1,44 @@
+@model KunstWerk.Models.Artist
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-fluid">
+    <a asp-action="Index" class="text-decoration-none text-secondary small fw-medium d-inline-flex align-items-center gap-1 mb-3">
+        <i class="bi bi-arrow-left"></i> Terug naar kunstenaars
+    </a>
+    <div class="card border shadow-sm overflow-hidden">
+        <div class="card-header text-white py-3 px-4" style="background: linear-gradient(to right, #84b133, #515c6a, #dfe056);">
+            <h5 class="mb-0 fw-bold"><i class="bi bi-plus-lg me-2"></i>Bewerk kunstenaar</h5>
+            <p class="mb-0 small" style="color: #eeeeee;">Bewerk kunstenaar</p>
+        </div>
+        <div class="card-body p-4">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group pb-3">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group pb-3">
+                        <label asp-for="PlaceOfBirth" class="control-label"></label>
+                        <input asp-for="PlaceOfBirth" class="form-control" />
+                        <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group pb-3">
+                        <label asp-for="YearOfBirth" class="control-label"></label>
+                        <input asp-for="YearOfBirth" class="form-control" />
+                        <span asp-validation-for="YearOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Bewaar" class="btn btn-outline-success" /> &nbsp;&nbsp;
+                        <a asp-action="Index" class="btn btn-outline-secondary">Terug naar lijst</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
