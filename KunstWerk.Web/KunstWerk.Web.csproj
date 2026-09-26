@@ -15,4 +15,16 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KunstWerk.Business\KunstWerk.Business.csproj" />
+    <ProjectReference Include="..\KunstWerk.DataAccess\KunstWerk.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\User\Controllers\" />
+    <Folder Include="Areas\User\Views\" />
+  </ItemGroup>
+
 </Project>

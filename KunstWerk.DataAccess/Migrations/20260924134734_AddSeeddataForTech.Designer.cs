@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace KunstWerk.Web.Migrations
+namespace KunstWerk.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260925075307_AddArtistToDb")]
-    partial class AddArtistToDb
+    [Migration("20260924134734_AddSeeddataForTech")]
+    partial class AddSeeddataForTech
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,16 +51,6 @@ namespace KunstWerk.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Artists");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FirstName = "Nancy",
-                            LastName = "Bailleux",
-                            PlaceOfBirth = "Antwerpen",
-                            YearOfBirth = "1964"
-                        });
                 });
 
             modelBuilder.Entity("KunstWerk.Models.Tech", b =>

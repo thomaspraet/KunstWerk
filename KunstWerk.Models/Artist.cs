@@ -11,10 +11,13 @@ namespace KunstWerk.Models
         public int Id { get; set; }
         [ValidateNever]
         public string FirstName { get; set; } = string.Empty;
+
         [Required]
         public string LastName { get; set; } = string.Empty;
+
         [ValidateNever]
         public string PlaceOfBirth { get; set; } = string.Empty;
+
         [ValidateNever]
         public string YearOfBirth { get; set; } = string.Empty;
     }

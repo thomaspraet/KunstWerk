@@ -1,3 +1,5 @@
+using KunstWerk.Business.Services;
+using KunstWerk.Business.Services.IServices;
 using KunstWerk.Web.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +10,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ITechService, TechService>();
+builder.Services.AddScoped<IArtistService, ArtistService>();
 
 var app = builder.Build();
 
@@ -27,9 +32,13 @@ app.UseAuthorization();
 app.MapStaticAssets();
 
 app.MapControllerRoute(
+    name: "Areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}")
+    .WithStaticAssets();
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

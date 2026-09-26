@@ -11,7 +11,7 @@
                 <h5 class="mb-0 fw-bold"><i class="bi bi-grid me-2"></i>Kunstenaar</h5>
                 <p class="mb-0 small" style="color: #eeeeee;">Beheer kunstenaars</p>
             </div>
-            <a asp-controller="Artist" asp-action="Create" class="btn btn-sm btn-outline-light fw-semibold d-inline-flex align-items-center gap-1">
+            <a asp-controller="Artists" asp-action="Create" class="btn btn-sm btn-outline-light fw-semibold d-inline-flex align-items-center gap-1">
                 <i class="bi bi-plus-lg"></i> Nieuwe kunstenaar
             </a>
         </div>
@@ -19,7 +19,8 @@
             <table class="table-styled">
                 <thead>
                     <tr>
-                        <th>Naam kunstenaar</th>
+                        <th>Voornaam kunstenaar</th>
+                        <th>Achternaam kunstenaar</th>
                         <th>Geboorteplaats</th>
                         <th>Geboortejaar</th>
                         <th></th>
@@ -33,7 +34,10 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(model => item.Name)
+                                    @Html.DisplayFor(model => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.LastName)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(model => item.PlaceOfBirth)
@@ -44,7 +48,7 @@
                                 <td>
                                 </td>
                                 <td class="text-end">
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> &nbsp;&nbsp;
+                                    <a class="btn btn-outline-success me-2" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                                     <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                                 </td>
                             </tr>

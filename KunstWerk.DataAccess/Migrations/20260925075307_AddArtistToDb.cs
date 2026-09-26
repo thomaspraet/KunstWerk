@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace KunstWerk.Web.Migrations
+namespace KunstWerk.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class AddInitialMigrtion : Migration
+    public partial class AddArtistToDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

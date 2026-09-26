@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace KunstWerk.Web.Migrations
+namespace KunstWerk.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddSeeddataForTech : Migration

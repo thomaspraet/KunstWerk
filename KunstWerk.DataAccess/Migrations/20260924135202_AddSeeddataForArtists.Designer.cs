@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace KunstWerk.Web.Migrations
+namespace KunstWerk.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20260924135202_AddSeeddataForArtists")]

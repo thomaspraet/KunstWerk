@@ -3,19 +3,16 @@ using KunstWerk.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace KunstWerk.Web.Migrations
+namespace KunstWerk.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260925075917_AddArtworkToDB")]
-    partial class AddArtworkToDB
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,6 +222,9 @@ namespace KunstWerk.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Dimensions")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -233,13 +233,39 @@ namespace KunstWerk.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TechId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ArtistId");
+
+                    b.HasIndex("TechId");
+
                     b.ToTable("Artwork");
+                });
+
+            modelBuilder.Entity("KunstWerk.Web.Models.Artwork", b =>
+                {
+                    b.HasOne("KunstWerk.Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KunstWerk.Models.Tech", "Tech")
+                        .WithMany()
+                        .HasForeignKey("TechId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("Tech");
                 });
 #pragma warning restore 612, 618
         }

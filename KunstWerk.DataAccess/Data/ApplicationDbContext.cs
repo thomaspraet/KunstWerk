@@ -1,5 +1,4 @@
 ﻿using KunstWerk.Models;
-using KunstWerk.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -7,14 +6,14 @@ namespace KunstWerk.Web.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<KunstWerk.Web.Models.Artwork> Artwork { get; set; } = default!;
+        public DbSet<Models.Artwork> Artwork { get; set; } = default!;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         { }
 
         public DbSet<Tech> Technics { get; set; }
         public DbSet<Artist> Artists { get; set; }
-        public DbSet<Artwork> Artworks { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,9 +54,7 @@ namespace KunstWerk.Web.Data
                 new Artist { Id = 1, FirstName = "Nancy", LastName = "Bailleux", PlaceOfBirth = "Antwerpen", YearOfBirth = "1964" }
                 );
 
-            modelBuilder.Entity<Artwork>().HasData(
-                new Artwork { Id = 1, Title = "Zonder titel", Dimensions = "90 x 65", ImageUrl = ""}
-                );
+            
         }
     }
 }

@@ -1,22 +1,23 @@
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using KunstWerk.Business.Services.IServices;
 using KunstWerk.Models;
 using KunstWerk.Web.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 
 public class ArtistsController : Controller
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IArtistService _artistService;
 
-    public ArtistsController(ApplicationDbContext context)
+    public ArtistsController(IArtistService artistService)
     {
-        _context = context;
+        _artistService = artistService;
     }
 
     // GET: ARTISTS
     public async Task<IActionResult> Index()    
     {
-        return View(await _context.Artists.ToListAsync());
+        return View(await _artistService.GetAllArtistsAsync());
     }
 
     // GET: ARTISTS/Create
@@ -34,8 +35,7 @@ public class ArtistsController : Controller
     {
         if (ModelState.IsValid)
         {
-            _context.Add(artist);
-            await _context.SaveChangesAsync();
+            await _artistService.CreateArtistAsync(artist);
             return RedirectToAction(nameof(Index));
         }
         return View(artist);
@@ -49,7 +49,7 @@ public class ArtistsController : Controller
             return NotFound();
         }
 
-        var artist = await _context.Artists.FindAsync(id);
+        var artist = await _artistService.GetArtistByIdAsync(id.Value);
         if (artist == null)
         {
             return NotFound();
@@ -71,22 +71,7 @@ public class ArtistsController : Controller
 
         if (ModelState.IsValid)
         {
-            try
-            {
-                _context.Update(artist);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ArtistExists(artist.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _artistService.UpdateArtistAsync(artist);
             return RedirectToAction(nameof(Index));
         }
         return View(artist);
@@ -95,13 +80,12 @@ public class ArtistsController : Controller
     // GET: ARTISTS/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
-        if (id == null)
+        if (id == null || id == 0)
         {
             return NotFound();
         }
 
-        var artist = await _context.Artists
-            .FirstOrDefaultAsync(m => m.Id == id);
+        var artist = await _artistService.GetArtistByIdAsync(id.Value);
         if (artist == null)
         {
             return NotFound();
@@ -115,18 +99,7 @@ public class ArtistsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int? id)
     {
-        var artist = await _context.Artists.FindAsync(id);
-        if (artist != null)
-        {
-            _context.Artists.Remove(artist);
-        }
-
-        await _context.SaveChangesAsync();
+        await _artistService.DeleteArtistAsync(id.Value);
         return RedirectToAction(nameof(Index));
-    }
-
-    private bool ArtistExists(int? id)
-    {
-        return _context.Artists.Any(e => e.Id == id);
     }
 }

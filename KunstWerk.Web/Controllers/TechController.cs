@@ -1,22 +1,22 @@
-
+using KunstWerk.Web.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using KunstWerk.Models;
-using KunstWerk.Web.Data;
+using KunstWerk.Business.Services.IServices;
 
 public class TechController : Controller
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ITechService _techService;
 
-    public TechController(ApplicationDbContext context)
+    public TechController(ITechService techService)
     {
-        _context = context;
+        _techService = techService;
     }
 
     // GET: TECHS
     public async Task<IActionResult> Index()    
     {
-        return View(await _context.Technics.ToListAsync());
+        return View(await _techService.GetAllTechsAsync());
     }
 
     // GET: TECHS/Create
@@ -34,8 +34,7 @@ public class TechController : Controller
     {
         if (ModelState.IsValid)
         {
-            _context.Add(tech);
-            await _context.SaveChangesAsync();
+            await _techService.CreateTechAsync(tech);
             return RedirectToAction(nameof(Index));
         }
         return View(tech);
@@ -49,7 +48,7 @@ public class TechController : Controller
             return NotFound();
         }
 
-        var tech = await _context.Technics.FindAsync(id);
+        var tech = await _techService.GetTechByIdAsync(id.Value);
         if (tech == null)
         {
             return NotFound();
@@ -71,22 +70,7 @@ public class TechController : Controller
 
         if (ModelState.IsValid)
         {
-            try
-            {
-                _context.Update(tech);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TechExists(tech.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _techService.UpdateTechAsync(tech);
             return RedirectToAction(nameof(Index));
         }
         return View(tech);
@@ -95,13 +79,12 @@ public class TechController : Controller
     // GET: TECHS/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
-        if (id == null)
+        if (id == null || id == 0)
         {
             return NotFound();
         }
 
-        var tech = await _context.Technics
-            .FirstOrDefaultAsync(m => m.Id == id);
+        var tech = await _techService.GetTechByIdAsync(id.Value);
         if (tech == null)
         {
             return NotFound();
@@ -115,18 +98,7 @@ public class TechController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int? id)
     {
-        var tech = await _context.Technics.FindAsync(id);
-        if (tech != null)
-        {
-            _context.Technics.Remove(tech);
-        }
-
-        await _context.SaveChangesAsync();
+        await _techService.DeleteTechAsync(id.Value);
         return RedirectToAction(nameof(Index));
-    }
-
-    private bool TechExists(int? id)
-    {
-        return _context.Technics.Any(e => e.Id == id);
     }
 }

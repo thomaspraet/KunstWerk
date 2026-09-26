@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace KunstWerk.Web.Migrations
+namespace KunstWerk.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddArtistAndTechToDb : Migration
