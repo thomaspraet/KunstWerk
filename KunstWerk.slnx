@@ -1,3 +1,7 @@
 <Solution>
+  <Project Path="KunstWerk.Business/KunstWerk.Business.csproj" Id="51365508-e7f1-41e9-a28f-0966fe5c5242" />
+  <Project Path="KunstWerk.DataAccess/KunstWerk.DataAccess.csproj" Id="1834049c-e632-4923-8961-c6b0aa240c64" />
+  <Project Path="KunstWerk.Models/KunstWerk.Models.csproj" Id="ad5a270a-2db7-42f9-962f-5e5de2b90788" />
+  <Project Path="KunstWerk.Utility/KunstWerk.Utility.csproj" Id="1fd8e8b8-ab74-4e40-843f-df45f6774f94" />
   <Project Path="KunstWerk.Web/KunstWerk.Web.csproj" />
 </Solution>

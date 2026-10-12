@@ -1,0 +1,53 @@
+@model KunstWerk.Models.Artist
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container px-5 py-4">
+    <div class="card border shadow-sm overflow-hidden">
+        <div class="card-header text-white py-3 px-4 d-flex align-items-center justify-content-between" style="background: linear-gradient(to right, #84b133, #515c6a, #dfe057);">
+            <div>
+                <h5 class="mb-0 fw-bold"><i class="bi bi-grid me-2"></i>Kunstenaars</h5>
+                <p class="mb-0 small" style="color: #FFF;">Beheer kunstenaars</p>
+            </div>
+            <div>
+                <a href="#" class="btn btn-outline-light btn-sm text-right">Bewerk kunstenaar</a>
+            </div>
+        </div>
+        <div class="row ms-4">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group mt-3 mb-3">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="BirthPlace" class="control-label"></label>
+                        <input asp-for="BirthPlace" class="form-control" />
+                        <span asp-validation-for="BirthPlace" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="BirthYear" class="control-label"></label>
+                        <input asp-for="BirthYear" class="form-control" />
+                        <span asp-validation-for="BirthYear" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Bewerk" class="btn btn-outline-success me-2 mb-3" />
+                        <a asp-action="Index" class="btn btn-outline-secondary mb-3">Terug naar lijst</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    

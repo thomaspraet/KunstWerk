@@ -1,0 +1,46 @@
+@model KunstWerk.Models.Technic
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container px-5 py-4">
+    <div class="card border shadow-sm overflow-hidden">
+        <div class="card-header text-white py-3 px-4 d-flex align-items-center justify-content-between" style="background: linear-gradient(to right, #84b133, #515c6a, #dfe057);">
+            <div>
+                <h5 class="mb-0 fw-bold"><i class="bi bi-grid me-2"></i>Kunstenaars</h5>
+                <p class="mb-0 small" style="color: #FFF;">Beheer kunstenaars</p>
+            </div>
+            <div>
+                <a href="#" class="btn btn-outline-light btn-sm text-right">Bewerk kunstenaar</a>
+            </div>
+        </div>
+        <div class="row mb-3 mt-3 ms-0">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <input type="submit" value="Bewerk" class="btn btn-outline-success me-2 mb-3" />
+                            <a asp-action="Index" class="btn btn-outline-secondary mb-3">Terug naar lijst</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
